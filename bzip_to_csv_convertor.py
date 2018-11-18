@@ -37,7 +37,7 @@ def kill_proc(proc):
     print ('The process is killed')
 
 if __name__ == '__main__':
-    file_path = sys.argv[-1] + '/*.gz'
+    file_path = sys.argv[-1] + '/*.bz2'
     print (file_path)
     print (sys.argv)
     bin_files = glob.glob(file_path)
@@ -46,7 +46,7 @@ if __name__ == '__main__':
         print ("Converting " + file +" to txt")
         name_file = file.split('.')[-2]
         name_file += '.txt'
-        command_line = './print_datafile  -z ' + file  + ' > '+ name_file
+        command_line = './print_datafile  -j ' + file  + ' > '+ name_file
         print (command_line)
         seconds  = 60
         print ('Process Started')
