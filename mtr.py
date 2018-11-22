@@ -32,9 +32,9 @@ def convert_str_to_avg(out, indx = -4):
 if __name__ == '__main__':
     #read the ip
     final_data = []
-    df = pd.read_csv('high_latency')
-    Ip = df['Ip'].value
-    counter = 0
+    df = pd.read_csv('../../zmap_data/high_latency/combined_high_latency.csv')
+    Ip = df['saddr'].values
+    counter = 1
     for ip in Ip:
         # ip = '8.8.8.8'
         print ('Starting Process for ', str(ip))
@@ -46,11 +46,13 @@ if __name__ == '__main__':
         final_data.append([ip,high_ip, As, rtt])
         print ('Finised Process for ', str(ip))
         if counter % 50 == 0:
-            df = pd.DataFrame({'Ip' : final_data[:,0],
-                                'high_ip': final_data[:,1],
-                                'As' : final_data[:,2],
-                                'rtt' : final_data[:,3]})
-            df.to_csv('High_hop_locati.csv')
+            #pdb.set_trace()
+            final_data_1  = np.reshape(final_data, (-1,4))
+            df1 = pd.DataFrame({'Ip' : final_data_1[:,0],
+                                'high_ip': final_data_1[:,1],
+                                'As' : final_data_1[:,2],
+                                'rtt' : final_data_1[:,3]})
+            df1.to_csv('High_hop_locati.csv')
             print ('********CSV files stored******')
         counter += 1
     # pdb.set_trace()
